@@ -1,6 +1,6 @@
 package infosys.teamd.bioskopapisecutity.Service;
 
-import com.infosys.timd.bioskopapi.Model.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
 import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.Optional;
