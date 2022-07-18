@@ -1,10 +1,10 @@
 package infosys.teamd.bioskopapisecutity.Repository;
 
-import com.infosys.timd.bioskopapi.DTO.*;
-import com.infosys.timd.bioskopapi.Model.*;
-import com.infosys.timd.bioskopapi.Exception.*;
-import com.infosys.timd.bioskopapi.Response.*;
-import com.infosys.timd.bioskopapi.Service.*;
+import infosys.teamd.bioskopapisecutity.DTO.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
+import infosys.teamd.bioskopapisecutity.Exception.*;
+import infosys.teamd.bioskopapisecutity.Response.*;
+import infosys.teamd.bioskopapisecutity.Service.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

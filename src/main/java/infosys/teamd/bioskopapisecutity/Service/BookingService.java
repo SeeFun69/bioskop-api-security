@@ -1,7 +1,7 @@
 package infosys.teamd.bioskopapisecutity.Service;
 
 
-import com.infosys.timd.bioskopapi.Model.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
 import java.util.List;
 import java.util.Optional;
 

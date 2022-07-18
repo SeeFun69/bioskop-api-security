@@ -2,9 +2,9 @@ package infosys.teamd.bioskopapisecutity.Controller;
 
 import infosys.teamd.bioskopapisecutity.DTO.*;
 import infosys.teamd.bioskopapisecutity.Model.*;
-import com.infosys.timd.bioskopapi.Exception.*;
-import com.infosys.timd.bioskopapi.Response.*;
-import com.infosys.timd.bioskopapi.Service.*;
+import infosys.teamd.bioskopapisecutity.Exception.*;
+import infosys.teamd.bioskopapisecutity.Response.*;
+import infosys.teamd.bioskopapisecutity.Service.*;
 
 import lombok.AllArgsConstructor;
 import org.apache.log4j.LogManager;

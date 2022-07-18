@@ -1,6 +1,6 @@
 package infosys.teamd.bioskopapisecutity.Model;
 
-import com.infosys.timd.bioskopapi.DTO.*;
+import infosys.teamd.bioskopapisecutity.DTO.*;
 
 import lombok.*;
 
