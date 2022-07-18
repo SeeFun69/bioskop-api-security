@@ -1,10 +1,10 @@
 package infosys.teamd.bioskopapisecutity.Controller;
 
-import com.infosys.timd.bioskopapi.DTO.*;
-import com.infosys.timd.bioskopapi.Exception.ResourceNotFoundException;
-import com.infosys.timd.bioskopapi.Response.ResponseHandler;
-import com.infosys.timd.bioskopapi.Model.Films;
-import com.infosys.timd.bioskopapi.Service.FilmsService;
+import infosys.teamd.bioskopapisecutity.DTO.*;
+import infosys.teamd.bioskopapisecutity.Exception.ResourceNotFoundException;
+import infosys.teamd.bioskopapisecutity.Response.ResponseHandler;
+import infosys.teamd.bioskopapisecutity.Model.Films;
+import infosys.teamd.bioskopapisecutity.Service.FilmsService;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

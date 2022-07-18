@@ -1,11 +1,6 @@
 package infosys.teamd.bioskopapisecutity.Service;
 
-import com.infosys.timd.bioskopapi.DTO.*;
-import com.infosys.timd.bioskopapi.Model.*;
-import com.infosys.timd.bioskopapi.Exception.*;
-import com.infosys.timd.bioskopapi.Response.*;
-import com.infosys.timd.bioskopapi.Service.*;
-import com.infosys.timd.bioskopapi.Repository.*;
+import infosys.teamd.bioskopapisecutity.Model.Films;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -19,7 +14,6 @@ public interface FilmsService {
    void deleteFilmById(Long id);
    List<Films> getByIsPlaying(Integer isPlaying);
    List<Films> getIsPlaying(Integer isPlaying);
-//   List<Films> getNamePriceStudio(String name);
    Films getReferenceById (Long id);
    Page<Films> findPaginatedFilms(int pageNo, int pageSize);
 
