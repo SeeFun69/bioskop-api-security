@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>infosys.teamd</groupId>
-    <artifactId>bioskop-api-secutity</artifactId>
+    <artifactId>bioskop-api-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bioskop-api-secutity</name>
     <description>bioskop-api-secutity</description>
