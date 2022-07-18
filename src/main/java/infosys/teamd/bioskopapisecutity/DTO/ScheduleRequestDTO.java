@@ -1,6 +1,6 @@
 package infosys.teamd.bioskopapisecutity.DTO;
 
-import com.infosys.timd.bioskopapi.Model.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
 import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalTime;

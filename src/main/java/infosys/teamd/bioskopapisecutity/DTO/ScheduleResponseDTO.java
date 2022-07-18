@@ -1,7 +1,7 @@
 package infosys.teamd.bioskopapisecutity.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.infosys.timd.bioskopapi.Model.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
 import lombok.*;
 
 import java.time.LocalDate;
