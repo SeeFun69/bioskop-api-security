@@ -1,8 +1,8 @@
 package infosys.teamd.bioskopapisecutity.Service;
 
-import com.infosys.timd.bioskopapi.Model.*;
-import com.infosys.timd.bioskopapi.Exception.*;;
-import com.infosys.timd.bioskopapi.Repository.*;
+import infosys.teamd.bioskopapisecutity.Model.*;
+import infosys.teamd.bioskopapisecutity.Exception.*;;
+import infosys.teamd.bioskopapisecutity.Repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
