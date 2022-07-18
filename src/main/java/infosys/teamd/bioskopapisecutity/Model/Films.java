@@ -1,7 +1,7 @@
 package infosys.teamd.bioskopapisecutity.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.infosys.timd.bioskopapi.DTO.*;
+import infosys.teamd.bioskopapisecutity.DTO.*;
 import lombok.*;
 
 import javax.persistence.*;
