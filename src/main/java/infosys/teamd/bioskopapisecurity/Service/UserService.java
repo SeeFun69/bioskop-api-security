@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface UserService {
 
-    List<User> getAll();
-    User createUser(User user);
+//    List<User> getAll();
+
     Optional<User> getUserById(Long users_Id);
     void deleteUserById(Long users_Id);
     User updateUser(User user) throws Exception;
@@ -17,4 +17,12 @@ public interface UserService {
     Page<User> findPaginated(int pageNo, int pageSize);
 //    List<User> getUserByNameLike(String name);
     List<User> getByKeyword(String keyword);
+
+    User createUser(User user);
+    Role saveRole(Role role);
+    void addRoleToUser(String username, String roleName);
+    User getUser(String username);
+    List<User> getUsers();
+
+
 }
