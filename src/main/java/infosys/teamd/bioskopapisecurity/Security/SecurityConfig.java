@@ -45,7 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint booking*/
                         "/teamD/v1/booking/**",
                         /*endpoint films*/
-                        "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**"
+                        "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**",
+                        /*endpoint reports*/
+                        "/teamD/v1/reports/rservasi/**"
                 )
                 .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
