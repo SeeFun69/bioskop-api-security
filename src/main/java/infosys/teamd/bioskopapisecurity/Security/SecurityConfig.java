@@ -39,14 +39,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests().antMatchers("/teamD/v1/login/**", "/teamD/v1/token/refresh/**")
                 .permitAll();
 
-        http.authorizeHttpRequests().antMatchers(GET, "/teamD/v1/users/**", "/teamD/v1/users/{users_Id}")
-                .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_SUPER_ADMIN", "ROLE_MANAGER");
+        http.authorizeHttpRequests().antMatchers(GET,
+                        /*endpoint user*/
+                        "/teamD/v1/users/**", "/teamD/v1/users/{users_Id}",
+                        /*endpoint booking*/
+                        "/teamD/v1//booking")
+                .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
-        http.authorizeHttpRequests().antMatchers(POST, "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**")
-                .hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().antMatchers(POST,
+                        /*endpoint user*/
+                        "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**")
+                .hasAnyAuthority("ROLE_ADMIN");
 
-        http.authorizeHttpRequests().antMatchers(DELETE, "/teamD/v1/users/{users_Id}/**")
-                .hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().antMatchers(DELETE,
+                        /*endpoint user*/
+                        "/teamD/v1/users/{users_Id}/**")
+                .hasAnyAuthority("ROLE_ADMIN");
+
+        http.authorizeHttpRequests().antMatchers(PUT,
+                        /*endpoint user*/
+                        "/teamD/v1/users/{users_Id}/**")
+                .hasAnyAuthority("ROLE_ADMIN");
+
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
