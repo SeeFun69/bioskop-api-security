@@ -47,7 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint films*/
                         "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
-                        "/teamD/v1/seats/**"
+                        "/teamD/v1/seats/**", "/teamD/v1/seats/{seatId}/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/**", "/teamD/v1/schedule/{id}/**"
                 )
                 .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
@@ -57,9 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint booking*/
                         "/teamD/v1/booking/**", "/teamD/v1/booking/Filmname/**",
                         /*endpoint films*/
-                        "teamD/v1/films/**", "teamD/v1/films/{isPlaying}/**",
+                        "/teamD/v1/films/**", "/teamD/v1/films/{isPlaying}/**",
                         /*endpoint seats*/
-                        "teamD/v1/seats/**", "teamD/v1/seats/isAvailable/**"
+                        "/teamD/v1/seats/**", "/teamD/v1/seats/isAvailable/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/**", "/teamD/v1/schedule/byfilmnameLike/**"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
@@ -71,7 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint films*/
                         "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
-                        "/teamD/v1/seats/{seatId}/**"
+                        "/teamD/v1/seats/{seatId}/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/{id}/**"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
@@ -83,7 +89,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint films*/
                         "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
-                        "/teamD/v1/seats/{seatId/**}"
+                        "/teamD/v1/seats/{seatId}/**}",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/{id}/**}"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
