@@ -20,7 +20,7 @@ public class ReportController {
     @Autowired
     private HttpServletResponse response;
 
-    @GetMapping("/rservasi")
+    @GetMapping("/reservasi")
     public void getReservasiReport() throws Exception{
         response.setContentType("application/pdf");
         response.setHeader("Content-Dispositin", "attachment; filname=\"reservasi_list.pdf\"");
