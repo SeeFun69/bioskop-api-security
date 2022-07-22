@@ -1,68 +1,5 @@
 
 
-INSERT INTO users (username,email_id,password)
-VALUES
-    ('Wahyu Wijanarko','WahyuW@gmail.com','Rahasiaaaa4x'),
-	('Sri Mulyani','S_Mulyani@gmail.com','Inip45sword'),
-	('Budi Setiawan','BudiW@gmail.com','inipasword123'),
-	('Nur Aida','Aida_Nur@gmail.com','123456aaaa'),
-	('Muh Toha','Tohaaa@gmail.com','98741252qwe'),
-	('Lionel','Lionel@gmail.com','Rahasiaaaa4x1'),
-	('David','David@gmail.com','Inip45sword'),
-	('Setiawan','Setiawan@gmail.com','inipasword1231'),
-	('Lily','Lily@gmail.com','123456aaaa1'),
-	('Tifany','Tifany@gmail.com','98741252qwe1'),
-	('Terkajuik','tarkajuik@hotmail.com','kapuyuaktabang'),
-    ('Tarpingkal','tarpingkal@hotmail.com','kapuyuakbangkiat'),
-    ('Tasilia','Tasilia@hotmail.com','kapuyuakTasiliak'),
-    ('Tasungkua','Tasungkua@ymail.com','kapuyuakTasungkua'),
-    ('Tajirangkang','Tajirangkang@apps.ipb.ac.id','kapuyuakTajirangkang'),
-    ('Tajungkang','Tajungkang@apps.ui.ac.id','kapuyuakTajungkang'),
-    ('Tagurajai','Tagurajai@outlook.com','kapuyuakTagurajai'),
-    ('Tatungkuk','Tatungkuk@outlook.com','kapuyuakTatungkuk'),
-    ('Tijengkang','Tijengkang@gmail.com','abdiTijengkang'),
-    ('Ngagolepak','Ngagolepakg@gmail.com','abdiNgagolepak'),
-    ('andrea', 'gomail@andrea', '1223grr'),
-	('robust', 'gomail@robust', '1223grr'),
-	('kai', 'gomail@kai', '1223grr'),
-	('travis', 'gomail@travis', '1223grr'),
-	('cardi', 'gomail@cardi', '1223grr'),
-	('rendraprames', 'gmail@rendra', '123grr'),
-	('antonyS', 'hu@antony', '123rrr'),
-	('kai', 'is@mail', '1123grr'),
-	('xavier', 'gomail@xavier', '1223grr'),
-	('saxon', 'jmail@rendra', '1233grr'),
-    ('siti','sitic4nt1c@gmail.com','51T1'),
-    ('vini','v1n1@gmail.com','v1n1'),
-    ('budi','budiY@gmail.com','budi0'),
-    ('kemal','k3mal@gmail.com','K3m4l'),
-    ('Badriah','badril@gmail.com','84dr1'),
-    ('Joni','joni@gmail.com','j0n1'),
-    ('munif','moonl@gmail.com','Moo00'),
-    ('coni','coni@gmail.com','C0n1'),
-    ('menik','men1k@gmail.com','m333n'),
-    ('putro','putr@gmail.com','Putri'),
-    ('billy','billy@gmail.com','billy123'),
-    ('marcelino','marcelino@gmail.com','marcelino123'),
-    ('yella','yella@gmail.com','yella123'),
-    ('viona','viona@gmail.com','viona123'),
-    ('prames','prames@gmail.com','prames123'),
-    ('rendra','rendra@gmail.com','rendra123'),
-    ('yohanes','yohanes@gmail.com','yohanes123'),
-    ('crush','crush@gmail.com','crush123'),
-    ('bayu','bayu@gmail.com','bayu123'),
-    ('ade','kangads@gmail.com','kangads123'),
-    ('yelliaviona', 'viona@gmail', '123vionaimut'),
-    ('viona', 'vionaa@gmail', '321vionaimut'),
-    ('yellia', 'yellia@gmail', '321yelliaimut'),
-    ('yell', 'yella@gmail', '123yellcantik'),
-    ('ona', 'ona@gmail', '123onagemoy'),
-    ('ade', 'ade@gmail', '123ade'),
-    ('rendra', 'rendra@gmail', '321rendra'),
-    ('billy', 'billy@gmail', '987billy'),
-    ('yohanness', 'yohannes@gmail', '555yohanness'),
-    ('BayuIndra', 'Bayu@gmail', '555Bayuu');
-
 INSERT INTO films (name,is_playing)
 VALUES
 	('Jurassic World Dominion',1),
@@ -255,11 +192,11 @@ values (6,5),
 		(2,20),
 		(21,11),
 		(1,1);
-
-select * from schedules s ;
-select * from films f;
-select * from users u;
-select * from seats s2;
+	
+--select * from schedules s ;
+--select * from films f;
+--select * from users u;
+--select * from seats s2;
 
 -- select price from schedules;
 -- select film_id from schedules where price = 35000;
