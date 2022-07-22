@@ -1,42 +1,39 @@
 package infosys.teamd.bioskopapisecurity.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-@Setter
-@Getter
+import static javax.persistence.FetchType.EAGER;
+
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Data
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
-
-
-    @Column(name = "username")
+    private String name;
     private String username;
-
-    @Column(name = "email_id")
-    private String emailId;
-
-    @Column(name = "password")
+    private String email;
     private String password;
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
+                ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
-                ", emailId='" + emailId + '\'' +
+                ", emailId='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

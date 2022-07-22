@@ -30,7 +30,7 @@ public class Booking {
                 .book_id(this.bookingId)
                 .usr_id(this.getUser().getUserId())
                 .usr_name(this.getUser().getUsername())
-                .email_usr(this.getUser().getEmailId())
+                .email_usr(this.getUser().getEmail())
                 .film_name(this.getSchedule().getFilms().getName())
                 .price(this.getSchedule().getPrice())
                 .studio(this.getSchedule().getSeats().getStudioName())
