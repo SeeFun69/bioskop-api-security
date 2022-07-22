@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint user*/
                         "/teamD/v1/users/**", "/teamD/v1/users/{users_Id}/**",
                         /*endpoint booking*/
-                        "/teamD/v1/booking/**",
+                        "/teamD/v1/booking/**", "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
                         "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
@@ -54,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests().antMatchers(POST,
                         /*endpoint user*/
                         "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/**", "/teamD/v1/booking/Filmname/**",
                         /*endpoint films*/
                         "teamD/v1/films/**", "teamD/v1/films/{isPlaying}/**",
                         /*endpoint seats*/
@@ -64,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests().antMatchers(DELETE,
                         /*endpoint user*/
                         "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
                         "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
@@ -74,6 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests().antMatchers(PUT,
                         /*endpoint user*/
                         "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
                         "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
