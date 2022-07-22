@@ -24,23 +24,27 @@ public class BioskopApiSecutityApplication {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    CommandLineRunner run(UserService userService) {
-        return args -> {
-            userService.saveRole(new Role(null,"ROLE_USER"));
-            userService.saveRole(new Role(null,"ROLE_MANAGER"));
-            userService.saveRole(new Role(null,"ROLE_ADMIN"));
-            userService.saveRole(new Role(null,"ROLE_SUPER_ADMIN"));
 
-            userService.createUser(new User(null,"BayuAswin","Bayu",new ArrayList<>(),"Bayu@gmail.com","1234"));
-            userService.createUser(new User(null,"MRasyid Hidayat","Rasyid",new ArrayList<>(),"Rasyid@gmail.com","2345"));
-            userService.createUser(new User(null,"Yohanes Crusz","Crusz",new ArrayList<>(),"Crusz@gmail.com","3456"));
-            userService.createUser(new User(null,"Rendra Prames","Prames",new ArrayList<>(),"Prames@gmail.com","4567"));
+//    @Bean
+//    CommandLineRunner run(UserService userService){
+//        return args -> {
+//            userService.saveRole(new Role(null, "ROLE_USER"));
+//            userService.saveRole(new Role(null, "ROLE_MANAGER"));
+//            userService.saveRole(new Role(null, "ROLE_ADMIN"));
+//            userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-            userService.addRoleToUser("BayuAswin","ROLE_USER");
-            userService.addRoleToUser("MRasyid Hidayat","ROLE_MANAGER");
-            userService.addRoleToUser("Yohanes Crusz","ROLE_ADMIN");
-            userService.addRoleToUser("Rendra Prames","ROLE_SUPER_ADMIN");
-        };
-    }
+//            userService.createUser(new User(null, "rasyid hidayat", "rasyid", "rasyid@gmail.com", "1234", new ArrayList<>()));
+//            userService.createUser(new User(null, "rasyid bagus", "ragu", "ragu@gmail.com", "1234", new ArrayList<>()));
+//            userService.createUser(new User(null, "bagus hidayat", "bagus", "bagus@gmail.com", "1234", new ArrayList<>()));
+//            userService.createUser(new User(null, "rasyid will", "will", "will@gmail.com", "1234", new ArrayList<>()));
+//
+//            userService.addRoleToUser("rasyid", "ROLE_USER");
+//            userService.addRoleToUser("bagus", "ROLE_MANAGER");
+//            userService.addRoleToUser("rasyid", "ROLE_USER");
+//            userService.addRoleToUser("will", "ROLE_ADMIN");
+//            userService.addRoleToUser("ragu", "ROLE_SUPER_ADMIN");
+//            userService.addRoleToUser("rasyid", "ROLE_ADMIN");
+//        };
+//    }
+
 }

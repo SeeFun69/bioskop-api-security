@@ -10,12 +10,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -36,10 +36,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/teamD/v1/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/teamD/v1/login/**", "/teamD/v1/token/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/teamD/v1/users/**").hasAnyAuthority("ROLE_USER","ROLE_SUPER_ADMIN");
-        http.authorizeRequests().antMatchers(POST,"/teamD/v1/users/save/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeHttpRequests().antMatchers("/teamD/v1/login/**", "/teamD/v1/token/refresh/**")
+                .permitAll();
+
+        http.authorizeHttpRequests().antMatchers(GET,
+                        /*endpoint user*/
+                        "/teamD/v1/users/**", "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/**",
+                        /*endpoint films*/
+                        "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**"
+                )
+                .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+
+        http.authorizeHttpRequests().antMatchers(POST,
+                        /*endpoint user*/
+                        "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
+                        /*endpoint films*/
+                        "teamD/v1/films/**", "teamD/v1/films/{isPlaying}/**"
+                )
+                .hasAnyAuthority("ROLE_ADMIN");
+
+        http.authorizeHttpRequests().antMatchers(DELETE,
+                        /*endpoint user*/
+                        "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint films*/
+                        "/teamD/v1/films/{filmId}/**"
+                )
+                .hasAnyAuthority("ROLE_ADMIN");
+
+        http.authorizeHttpRequests().antMatchers(PUT,
+                        /*endpoint user*/
+                        "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint films*/
+                        "/teamD/v1/films/{filmId}/**"
+                )
+                .hasAnyAuthority("ROLE_ADMIN");
+
+
+
+
+        http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

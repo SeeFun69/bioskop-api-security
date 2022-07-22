@@ -6,16 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.AUTO;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
+
     @Id
-    @GeneratedValue(strategy = AUTO)
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
 }
