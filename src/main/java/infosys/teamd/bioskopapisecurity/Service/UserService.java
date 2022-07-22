@@ -8,6 +8,13 @@ import java.util.Optional;
 public interface UserService {
 
     List<User> getAll();
+    User saveUser(User user);
+    Role saveRole(Role role);
+    void addRoleToUser(String username, String roleName);
+    User getUser(String username);
+
+
+
     User createUser(User user);
     Optional<User> getUserById(Long users_Id);
     void deleteUserById(Long users_Id);

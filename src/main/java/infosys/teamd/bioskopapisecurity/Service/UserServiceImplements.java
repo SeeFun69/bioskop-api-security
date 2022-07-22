@@ -1,31 +1,90 @@
 package infosys.teamd.bioskopapisecurity.Service;
 
-import infosys.teamd.bioskopapisecurity.Model.*;
-import infosys.teamd.bioskopapisecurity.Exception.*;;
-import infosys.teamd.bioskopapisecurity.Repository.*;
+import infosys.teamd.bioskopapisecurity.Exception.ResourceNotFoundException;
+import infosys.teamd.bioskopapisecurity.Model.Role;
+import infosys.teamd.bioskopapisecurity.Model.User;
+import infosys.teamd.bioskopapisecurity.Repository.RoleRepository;
+import infosys.teamd.bioskopapisecurity.Repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+;
+
 @Service
 @AllArgsConstructor
-public class UserServiceImplements implements UserService{
+//@RequiredArgsConstructor
+@Transactional
+@Slf4j
+public class UserServiceImplements implements UserService, UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            log.error("User not Found");
+            throw new UsernameNotFoundException("User not found");
+        } else {
+            log.info("User found in the database: {}", username);
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            user.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
+            });
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        }
+    }
+
+    @Override
+    public User saveUser(User user) {
+        log.info("saving new user {} to database", user.getUsername());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        log.info("saving new role {} to database", role.getName());
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public void addRoleToUser(String username, String roleName) {
+        log.info("adding role {} to user{}", roleName, username);
+        User user = userRepository.findByUsername(username);
+        Role role = roleRepository.findByName(roleName);
+        user.getRoles().add(role);
+    }
+
+    @Override
+    public User getUser(String username) {
+        log.info("fetching user{}", username);
+        return userRepository.findByUsername(username);
+    }
 
     /***
      * Get All User
      * @return
      */
     public List<User> getAll(){
+        log.info("fetching user{}");
         List<User> user = userRepository.findAll();
-        if(user.isEmpty()){
-            throw new ResourceNotFoundException("User not exist with id :");
-        }
         return this.userRepository.findAll();
 
     }
@@ -129,5 +188,4 @@ public class UserServiceImplements implements UserService{
         }
         return this.userRepository.findByKeyword(keyword);
     }
-
 }
