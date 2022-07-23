@@ -22,7 +22,7 @@ public class ReportController {
 
 
     @GetMapping("/schedule")
-    public void getReservasiReport() throws Exception {
+    public void getReservasiReportA() throws Exception {
         response.setContentType("application/pdf");
         response.setHeader("Content-Dispositin", "attachment; filname=\"schedules_list.pdf\"");
         JasperPrint jasperPrint = reportService.generateJasperPrintA();
@@ -34,6 +34,24 @@ public class ReportController {
         response.setContentType("application/pdf");
         response.setHeader("Content-Dispositin", "attachment; filname=\"reservasi_list.pdf\"");
         JasperPrint jasperPrint = reportService.generateJasperPrint();
+
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+    }
+
+    @GetMapping("/films")
+    public void getReservasiReportFilms() throws Exception{
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Dispositin", "attachment; filname=\"films_list.pdf\"");
+        JasperPrint jasperPrint = reportService.generateJasperPrintFilms();
+
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+    }
+
+    @GetMapping("/seats/Available")
+    public void getReservasiReportSeatsAvailable() throws Exception{
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Dispositin", "attachment; filname=\"films_list.pdf\"");
+        JasperPrint jasperPrint = reportService.generateJasperPrintSeatsAvailable();
 
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
     }
