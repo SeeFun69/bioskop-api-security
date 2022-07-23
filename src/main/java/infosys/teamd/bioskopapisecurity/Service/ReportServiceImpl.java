@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService{
     }
 
     @Override
-    public JasperPrint generateJasperPrint() throws Exception {
+    public JasperPrint generateJasperPrintA() throws Exception {
         InputStream fileReport = new ClassPathResource("reports/Schedules.jasper").
                 getInputStream();
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileReport);
@@ -37,13 +37,4 @@ public class ReportServiceImpl implements ReportService{
                 getConnection());
         return jasperPrint;
     }
-//    @Override
-//    public JasperPrint generateJasperPrintA() throws Exception {
-//        InputStream fileReport = new ClassPathResource("reports/rese.jasper").
-//                getInputStream();
-//        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileReport);
-//        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,
-//                getConnection());
-//        return jasperPrint;
-//    }
 }

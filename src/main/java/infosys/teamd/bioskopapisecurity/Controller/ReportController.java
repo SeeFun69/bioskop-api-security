@@ -23,7 +23,7 @@ public class ReportController {
     public void getReservasiReport() throws Exception {
         response.setContentType("application/pdf");
         response.setHeader("Content-Dispositin", "attachment; filname=\"schedules_list.pdf\"");
-        JasperPrint jasperPrint = reportService.generateJasperPrint();
+        JasperPrint jasperPrint = reportService.generateJasperPrintA();
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
     }
 }
