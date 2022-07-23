@@ -1,6 +1,5 @@
 package infosys.teamd.bioskopapisecurity.Service;
 
-
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -28,6 +27,19 @@ public class ReportServiceImpl implements ReportService{
             return null;
         }
     }
+
+
+    @Override
+    public JasperPrint generateJasperPrintA() throws Exception {
+        InputStream fileReport = new ClassPathResource("reports/Schedules.jasper").
+        getInputStream();
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileReport);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,
+                getConnection());
+        return jasperPrint;
+    }
+    
+    @Override
     public JasperPrint generateJasperPrint() throws Exception{
         InputStream fileReport = new ClassPathResource("reports/reservasi.jasper").
                 getInputStream();

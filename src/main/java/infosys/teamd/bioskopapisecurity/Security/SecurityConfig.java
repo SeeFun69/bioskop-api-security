@@ -50,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/teamD/v1/seats/**", "/teamD/v1/seats/{seatId}/**",
                         /*endpoint schedule*/
                         "/teamD/v1/schedule/**", "/teamD/v1/schedule/{id}/**",
+                        /*endpoint schedule report*/
+                        "/teamD/v1/reports/schedule/**",
                         /*endpoint reports*/
                         "/teamD/v1/reports/rservasi/**"
                 )
