@@ -43,9 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint user*/
                         "/teamD/v1/users/**", "/teamD/v1/users/{users_Id}/**",
                         /*endpoint booking*/
-                        "/teamD/v1/booking/**",
+                        "/teamD/v1/booking/**", "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
                         "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**",
+                        /*endpoint seats*/
+                        "/teamD/v1/seats/**", "/teamD/v1/seats/{seatId}/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/**", "/teamD/v1/schedule/{id}/**",
                         /*endpoint reports*/
                         "/teamD/v1/reports/rservasi/**"
                 )
@@ -54,24 +58,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests().antMatchers(POST,
                         /*endpoint user*/
                         "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/**", "/teamD/v1/booking/Filmname/**",
                         /*endpoint films*/
-                        "teamD/v1/films/**", "teamD/v1/films/{isPlaying}/**"
+                        "/teamD/v1/films/**", "/teamD/v1/films/{isPlaying}/**",
+                        /*endpoint seats*/
+                        "/teamD/v1/seats/**", "/teamD/v1/seats/isAvailable/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/**", "/teamD/v1/schedule/byfilmnameLike/**"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
         http.authorizeHttpRequests().antMatchers(DELETE,
                         /*endpoint user*/
                         "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
-                        "/teamD/v1/films/{filmId}/**"
+                        "/teamD/v1/films/{filmId}/**",
+                        /*endpoint seats*/
+                        "/teamD/v1/seats/{seatId}/**",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/{id}/**"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
         http.authorizeHttpRequests().antMatchers(PUT,
                         /*endpoint user*/
                         "/teamD/v1/users/{users_Id}/**",
+                        /*endpoint booking*/
+                        "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
-                        "/teamD/v1/films/{filmId}/**"
+                        "/teamD/v1/films/{filmId}/**",
+                        /*endpoint seats*/
+                        "/teamD/v1/seats/{seatId}/**}",
+                        /*endpoint schedule*/
+                        "/teamD/v1/schedule/{id}/**}"
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
