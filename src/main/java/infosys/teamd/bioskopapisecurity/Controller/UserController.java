@@ -223,6 +223,7 @@ public class UserController {
             User user = userService.getUserById(users_Id)
                     .orElseThrow(() -> new ResourceNotFoundException("User not exist with user_Id :" + users_Id));
 
+            user.setName(userDetails.getName());
             user.setUsername(userDetails.getUsername());
             user.setEmail(userDetails.getEmail());
             user.setPassword(userDetails.getPassword());
