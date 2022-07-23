@@ -13,17 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/teamD/v1/reports")
 public class ReportController {
+
     @Autowired
     private ReportService reportService;
 
     @Autowired
     private HttpServletResponse response;
 
+
     @GetMapping("/schedule")
     public void getReservasiReport() throws Exception {
         response.setContentType("application/pdf");
         response.setHeader("Content-Dispositin", "attachment; filname=\"schedules_list.pdf\"");
         JasperPrint jasperPrint = reportService.generateJasperPrintA();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+    }
+    
+    @GetMapping("/reservasi")
+    public void getReservasiReport() throws Exception{
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Dispositin", "attachment; filname=\"reservasi_list.pdf\"");
+        JasperPrint jasperPrint = reportService.generateJasperPrint();
+
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
     }
 }

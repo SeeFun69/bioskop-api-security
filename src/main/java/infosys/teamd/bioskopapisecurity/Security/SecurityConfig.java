@@ -51,7 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint schedule*/
                         "/teamD/v1/schedule/**", "/teamD/v1/schedule/{id}/**",
                         /*endpoint schedule report*/
-                        "/teamD/v1/reports/schedule/**"
+                        "/teamD/v1/reports/schedule/**",
+                        /*endpoint reports*/
+                        "/teamD/v1/reports/rservasi/**"
                 )
                 .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
