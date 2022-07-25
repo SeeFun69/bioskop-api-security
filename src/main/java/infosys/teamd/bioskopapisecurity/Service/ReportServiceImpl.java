@@ -48,4 +48,22 @@ public class ReportServiceImpl implements ReportService{
                 getConnection());
         return jasperPrint;
     }
+    @Override
+    public JasperPrint generateJasperPrintFilms() throws Exception {
+        InputStream fileReport = new ClassPathResource("reports/Films.jasper").
+                getInputStream();
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileReport);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,
+                getConnection());
+        return jasperPrint;
+    }
+    @Override
+    public JasperPrint generateJasperPrintSeatsAvailable() throws Exception {
+        InputStream fileReport = new ClassPathResource("reports/Seats_Available.jasper").
+                getInputStream();
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileReport);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,
+                getConnection());
+        return jasperPrint;
+    }
 }
