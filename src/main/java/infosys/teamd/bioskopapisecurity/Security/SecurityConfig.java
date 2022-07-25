@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/teamD/v1/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeHttpRequests().antMatchers("/teamD/v1/login/**", "/teamD/v1/token/refresh/**")
+        http.authorizeHttpRequests().antMatchers("/teamD/v1/user/save/**", "/teamD/v1/login/**", "/teamD/v1/token/refresh/**")
                 .permitAll();
 
         http.authorizeHttpRequests().antMatchers(GET,
@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeHttpRequests().antMatchers(POST,
                         /*endpoint user*/
-                        "/teamD/v1/user/save/**", "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
+                        "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
                         /*endpoint booking*/
                         "/teamD/v1/booking/**", "/teamD/v1/booking/Filmname/**",
                         /*endpoint films*/

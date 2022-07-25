@@ -21,6 +21,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.catalina.realm.UserDatabaseRealm.getRoles;
+
 @Service
 @AllArgsConstructor
 @Transactional
