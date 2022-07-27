@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -262,9 +263,9 @@ public class UserController {
      * @return
      */
     @DeleteMapping("/users/{users_Id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable Long users_Id){
+    public ResponseEntity<Object> deleteUser(@PathVariable Long users_Id, Principal principal, User users){
         try {
-            userService.deleteUserById(users_Id);
+            userService.deleteUserById(users_Id,  principal, users);
             Map<String, Boolean> response = new HashMap<>();
             response.put("deleted", Boolean.TRUE);
             logger.info("==================== Logger Start Delete Users ====================");
