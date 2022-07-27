@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:8083")
+//@CrossOrigin(origins = "http://localhost:8083")
 @RestController
-@RequestMapping("/teamD/v1")
+@RequestMapping("teamD/v1")
 public class SeatsController {
 
     private static final Logger logger = LogManager.getLogger(SeatsController.class);

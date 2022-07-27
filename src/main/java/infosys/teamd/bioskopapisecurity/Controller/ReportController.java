@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/teamD/v1/reports")
+@RequestMapping("teamD/v1/reports")
 public class ReportController {
 
     @Autowired

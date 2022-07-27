@@ -38,7 +38,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Edited By Rendra
  */
 @RestController
-@RequestMapping("/teamD/v1")
+@RequestMapping("teamD/v1")
 @AllArgsConstructor
 @SecurityRequirement(name = "bearer-key")
 public class UserController {
