@@ -6,6 +6,7 @@ import infosys.teamd.bioskopapisecurity.Repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class BookingServiceImpl implements BookingService{
 
     private BookingRepository bookingRepository;
+    private UserRepository userRepository;
+    private RoleRepo roleRepo;
 
     @Override
     public List<Booking> getAll() {
@@ -48,7 +51,21 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public Booking createBooking(Booking booking) {
+    public Booking createBooking(Booking booking, Principal principal) {
+        String username = principal.getName();
+        User user = this.userRepository.findByUsername(username);
+
+//        booking.setCreatedAt(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")));
+//        booking.setUpdatedAt(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")));
+
+        if (principal == null){
+            throw new ResourceNotFoundException("Login First");
+        }
+        if (booking.getUser() == null){
+            booking.setUser(user);
+        } else if(!(user.getRoles().contains(this.roleRepo.findByName("ROLE_ADMIN")))) {
+            throw new ResourceNotFoundException("Not authenticated as an admin");
+        }
         return this.bookingRepository.save(booking);
     }
 

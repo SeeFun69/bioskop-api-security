@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -36,7 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/teamD/v1/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeHttpRequests().antMatchers("/teamD/v1/user/save/**", "/teamD/v1/login/**", "/teamD/v1/token/refresh/**")
+        http.authorizeHttpRequests().antMatchers(
+                "/teamD/v1/user/save/**",
+                        "/teamD/v1/login/**",
+                        "/teamD/v1/token/refresh/**",
+                        /*All Films*/
+                        "/teamD/v1/films/**",
+                        /*All Schedule*/
+                        "/teamD/v1/schedule/**",
+
+                        "/swagger-ui/**")
                 .permitAll();
 
         http.authorizeHttpRequests().antMatchers(GET,
@@ -45,11 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint booking*/
                         "/teamD/v1/booking/**", "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
-                        "/teamD/v1/films/**", "/teamD/v1/films/{filmId}/**",
+                         "/teamD/v1/films/{filmId}/**",
                         /*endpoint seats*/
                         "/teamD/v1/seats/**", "/teamD/v1/seats/{seatId}/**",
                         /*endpoint schedule*/
-                        "/teamD/v1/schedule/**", "/teamD/v1/schedule/{id}/**",
+                         "/teamD/v1/schedule/{id}/**",
                         /*endpoint schedule report*/
                         "/teamD/v1/reports/schedule/**",
                         /*endpoint reports*/
@@ -65,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /*endpoint user*/
                         "/teamD/v1/role/addtouser/**", "/teamD/v1/users/**",
                         /*endpoint booking*/
-                        "/teamD/v1/booking/**", "/teamD/v1/booking/Filmname/**",
+                         "/teamD/v1/booking/Filmname/**",
                         /*endpoint films*/
                         "/teamD/v1/films/**", "/teamD/v1/films/{isPlaying}/**",
                         /*endpoint seats*/
@@ -75,9 +85,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
+        http.authorizeHttpRequests().antMatchers(POST, "/teamD/v1/booking/**" )
+                .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+
         http.authorizeHttpRequests().antMatchers(DELETE,
-                        /*endpoint user*/
-                        "/teamD/v1/users/{users_Id}/**",
                         /*endpoint booking*/
                         "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
@@ -89,9 +100,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
+        http.authorizeHttpRequests().antMatchers(DELETE, "/teamD/v1/users/{users_Id}/**")
+                .hasAnyAuthority("ROLE_ADMIN","ROLE_USER");
+
         http.authorizeHttpRequests().antMatchers(PUT,
-                        /*endpoint user*/
-                        "/teamD/v1/users/{users_Id}/**",
                         /*endpoint booking*/
                         "/teamD/v1/booking/{id}/**",
                         /*endpoint films*/
@@ -103,14 +115,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .hasAnyAuthority("ROLE_ADMIN");
 
+        http.authorizeHttpRequests().antMatchers(PUT, "/teamD/v1/users/{users_Id}/**")
+                .hasAnyAuthority("ROLE_ADMIN","ROLE_USER");
 
 
 
-        http.authorizeHttpRequests().anyRequest().authenticated();
+
+//        http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**");
+    }
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
