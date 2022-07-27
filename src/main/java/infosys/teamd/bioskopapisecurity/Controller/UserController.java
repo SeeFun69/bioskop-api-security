@@ -11,10 +11,11 @@ import infosys.teamd.bioskopapisecurity.Response.*;
 import infosys.teamd.bioskopapisecurity.Service.*;
 import infosys.teamd.bioskopapisecurity.Repository.*;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
@@ -37,12 +39,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/teamD/v1")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class UserController {
 
     private static final Logger logger = LogManager.getLogger(UserController.class);
 //    private final UserServiceImplements userServiceImplements;
     private final UserRepository userRepository;
     private final UserService userService;
+
+//    @PostMapping("/login")
+//    public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest){
+//        return authServiceImpl.authenticateUser(loginRequest);
+//    }
 
     @PostMapping("/user/save")
     public ResponseEntity<User>createUser(@RequestBody User user) {

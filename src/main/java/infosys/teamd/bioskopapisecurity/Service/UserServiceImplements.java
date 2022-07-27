@@ -65,6 +65,12 @@ public class UserServiceImplements implements UserService, UserDetailsService {
     }
 
     public User createUser(User user){
+        if(user.getRoles().size() == 0){
+            Role role = roleRepo.findByName("ROLE_USER");
+            Collection<Role> roles = new ArrayList<>();
+            roles.add(role);
+            user.setRoles(roles);
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
