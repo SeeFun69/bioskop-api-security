@@ -5,6 +5,7 @@ import infosys.teamd.bioskopapisecurity.Exception.ResourceNotFoundException;
 import infosys.teamd.bioskopapisecurity.Response.ResponseHandler;
 import infosys.teamd.bioskopapisecurity.Model.Films;
 import infosys.teamd.bioskopapisecurity.Service.FilmsService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("teamD/v1")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class FilmsControllerDTO {
 
     private static final Logger logger = LogManager.getLogger(FilmsControllerDTO.class);

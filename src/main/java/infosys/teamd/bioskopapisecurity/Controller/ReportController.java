@@ -1,6 +1,7 @@
 package infosys.teamd.bioskopapisecurity.Controller;
 
 import infosys.teamd.bioskopapisecurity.Service.ReportService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("teamD/v1/reports")
+@SecurityRequirement(name = "bearer-key")
 public class ReportController {
 
     @Autowired
