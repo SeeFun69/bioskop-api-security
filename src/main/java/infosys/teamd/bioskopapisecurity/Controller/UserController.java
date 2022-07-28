@@ -11,6 +11,10 @@ import infosys.teamd.bioskopapisecurity.Response.*;
 import infosys.teamd.bioskopapisecurity.Service.*;
 import infosys.teamd.bioskopapisecurity.Repository.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,14 +22,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,7 +46,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Edited By Rendra
  */
 @RestController
-@RequestMapping("/teamD/v1")
+@RequestMapping("teamD/v1")
 @AllArgsConstructor
 @SecurityRequirement(name = "bearer-key")
 public class UserController {
@@ -51,6 +60,39 @@ public class UserController {
 //    public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest){
 //        return authServiceImpl.authenticateUser(loginRequest);
 //    }
+
+    @Operation(summary = "Login for get token")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success get token",
+                    content = { @Content(mediaType = "application/json") }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized, failed login",
+                    content = @Content) })
+    @PostMapping("/login")
+    public void getToken(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        String access_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .sign(algorithm);
+        String refresh_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .sign(algorithm);
+//
+//        response.setHeader("access_token", access_token);
+//        response.setHeader("refresh_token", refresh_token);
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_token", access_token);
+        tokens.put("refresh_token", refresh_token);
+        response.setContentType(APPLICATION_JSON_VALUE);
+        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+    }
 
     @PostMapping("/user/save")
     public ResponseEntity<User>createUser(@RequestBody User user) {
@@ -262,9 +304,9 @@ public class UserController {
      * @return
      */
     @DeleteMapping("/users/{users_Id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable Long users_Id){
+    public ResponseEntity<Object> deleteUser(@PathVariable Long users_Id, Principal principal, User users){
         try {
-            userService.deleteUserById(users_Id);
+            userService.deleteUserById(users_Id,  principal, users);
             Map<String, Boolean> response = new HashMap<>();
             response.put("deleted", Boolean.TRUE);
             logger.info("==================== Logger Start Delete Users ====================");

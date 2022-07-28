@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +32,6 @@ public class UserServiceImplements implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -113,11 +113,22 @@ public class UserServiceImplements implements UserService, UserDetailsService {
      * @param users_Id
      */
     @Override
-    public void deleteUserById(Long users_Id) {
+    public void deleteUserById(Long users_Id, Principal principal, User users) {
         Optional<User> optionalUser = userRepository.findById(users_Id);
         if(optionalUser.isEmpty()){
             throw new ResourceNotFoundException("User not exist with id :" + users_Id);
         }
+//        String username = principal.getName();
+//        User user = this.userRepository.findByUsername(username);
+//
+//        if (principal == null){
+//            throw new ResourceNotFoundException("Login First");
+//        }
+//        if (users.getUserId() == null){
+//            users.setUserId(users_Id);
+//        } else if(!(user.getRoles().contains(this.roleRepo.findByName("ROLE_ADMIN")))) {
+//            throw new ResourceNotFoundException("Not authenticated as an admin");
+//        }
         User user = userRepository.getReferenceById(users_Id);
         this.userRepository.delete(user);
     }

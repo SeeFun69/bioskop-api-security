@@ -2,6 +2,8 @@ package infosys.teamd.bioskopapisecurity.Service;
 
 import infosys.teamd.bioskopapisecurity.Model.*;
 import org.springframework.data.domain.Page;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public interface UserService {
 
     List<User> getAll();
     Optional<User> getUserById(Long users_Id);
-    void deleteUserById(Long users_Id);
+    void deleteUserById(Long users_Id, Principal principal,  User users);
     User updateUser(User user) throws Exception;
     User getReferenceById(Long users_Id);
     User getUserId(Long users_Id);

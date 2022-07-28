@@ -6,6 +6,7 @@ import infosys.teamd.bioskopapisecurity.Exception.*;
 import infosys.teamd.bioskopapisecurity.Response.*;
 import infosys.teamd.bioskopapisecurity.Service.*;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,8 +22,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/teamD/v1")
+@RequestMapping("teamD/v1")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class BookingController {
 
     private static final Logger logger = LogManager.getLogger(BookingController.class);
